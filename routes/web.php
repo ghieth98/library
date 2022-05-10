@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Routes for Books
 Route::post('/books', [BooksController::class, 'store']);
 Route::patch('/books/{book}', [BooksController::class, 'update']);
+Route::delete('/books/{book}', [BooksController::class, 'destroy']);
+
+//Routes for Authors
+Route::post('/author', [AuthorsController::class, 'store']);
