@@ -16,11 +16,7 @@ class AuthorManagementTest extends TestCase
 
     public function an_author_can_be_created()
     {
-        $this->withoutExceptionHandling();
-        $this->post('/author',[
-            'name'=>'Colons',
-            'dob'=>'07/19/1998',
-        ]);
+        $this->post('/authors', $this->data());
 
         $author = Author::all();
 
@@ -29,5 +25,33 @@ class AuthorManagementTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $author->first()->dob);
         $this->assertEquals('19/07/1998', $author->first()->dob->format('d/m/Y'));
 
+    }
+
+    /** @test  */
+
+    public function a_name_is_required()
+    {
+        $response = $this->post('/authors', array_merge($this->data(),['name'=>'']));
+
+        $response->assertSessionHasErrors('name');
+    }
+
+    /** @test  */
+
+    public function a_dob_is_required()
+    {
+        $response = $this->post('/authors', array_merge($this->data(),['dob'=>'']));
+
+        $response->assertSessionHasErrors('dob');
+    }
+
+
+
+    private function data()
+    {
+        return [
+            'name' => 'Colons',
+            'dob' => '07/19/1998',
+        ];
     }
 }
