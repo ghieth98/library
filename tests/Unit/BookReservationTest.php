@@ -81,4 +81,5 @@ class BookReservationTest extends TestCase
         $this->assertNotNull(Reservation::find(2)->checked_in_at);
         $this->assertEquals(now(), Reservation::find(2)->checked_out_at);
     }
+
 }
