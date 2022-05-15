@@ -23,6 +23,7 @@ Route::patch('/books/{book}', [BooksController::class, 'update']);
 Route::delete('/books/{book}', [BooksController::class, 'destroy']);
 
 //Routes for Authors
+Route::get('/authors/create', [AuthorsController::class, 'create']);
 Route::post('/authors', [AuthorsController::class, 'store']);
 
 
